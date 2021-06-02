@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Unsprinkle — Module 6 workshop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this workshop, we're going to optimize and improve an existing application.
 
-## Available Scripts
+Using the tricks we learned about typography and images in this module, we'll improve the performance, accessibility, and user experience for Unsprinkle, a photo-sharing application.
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+## Exercise 1: Optimize fonts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project is using a variable font, but it's quite hefty! Using Google Fonts, swap it out for an optimized version.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Bonus points for self-hosting the optimized font!
 
-### `yarn test`
+## Exercise 2: Improve images
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For a photo-heavy site like this one, we can significantly improve the user experience by optimizing the images that appear.
 
-### `yarn build`
+The images in the photo grid and the hero should implement the following optimizations:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Serve larger images to users who use high-DPI displays.
+2. Serve modern `.avif` images instead of `.jpg` images to users on supported browsers.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**All of the images have already been created for you**. They follow a consistent naming pattern:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+- photo-name.jpg
+- photo-name.avif
+- photo-name@2x.jpg
+- photo-name@2x.avif
+- photo-name@3x.jpg
+- photo-name@3x.avif
+```
 
-### `yarn eject`
+For the hero, you can hardcode these values. For the photo grid, you'll need to use some JavaScript to update the photo names. You can use the `replace` method:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```js
+src.replace('.jpg', '@2x.avif');
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+One last thing: the images are a little distorted right now. This happens because our images are all the same size, but they don't share the same aspect ratio.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Here's what the giraffe picture looks like by default:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Squashed photo of a giraffe](./docs/before.png)
 
-## Learn More
+…And here's what it should look like after your modifications:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![Regular photo of a giraffe](./docs/after.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Exercise 3: Accessibility issues
 
-### Code Splitting
+There are several images in this application, and none of them have been given the required "alt" attribute.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Update all images so that they have appropriate alternative text.
 
-### Analyzing the Bundle Size
+There are 11 images in total, including 2 in the `Hero.js` component. Be sure to consider the context (if you weren't able to see the page, what would you want to know about them?).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Exercise 4: Tag overflow
 
-### Making a Progressive Web App
+Each photo has associated tags, shown in small grey boxes below the image:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![Screenshot from the app, showing a dog with 3 tags below](./docs/tag-example.png)
 
-### Advanced Configuration
+Some of these items have _very_ long tags:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![Screenshot from the app, showing a lizard with a particlarly long tag](./docs/long-tag-example.png)
 
-### Deployment
+Update the CSS so that the tags _always fit on 1 line_. If there is too much text, the final tag should have an ellipsis (…).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![The lizard example, but with an ellipsis at the right edge, in the second label](./docs/tag-clamped.png)
 
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**This is a challenging exercise.** You'll need to tweak some of the existing CSS (Hint: Flexbox might not be the right layout mode for this)
