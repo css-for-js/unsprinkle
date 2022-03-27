@@ -32,6 +32,7 @@ const Input = styled.input`
   right: 0;
   bottom: 0;
   width: 100%;
+  height: 100%;
   background: var(--color-gray-100);
   /* Arbitrarily large value to ensure rounding */
   border-radius: 1000px;
