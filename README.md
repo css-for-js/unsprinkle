@@ -4,6 +4,12 @@ In this workshop, we're going to optimize and improve an existing application.
 
 Using the tricks we learned about typography and images in this module, we'll improve the performance, accessibility, and user experience for Unsprinkle, a photo-sharing application.
 
+## Troubleshooting
+
+If you run into problems running a local development server, check out our [Troubleshooting Guide](https://courses.joshwcomeau.com/troubleshooting) on the course platform.
+
+This guide addresses the common `Digital Envelope Routine` error you may have seen.
+
 ---
 
 ## Exercise 1: Optimize fonts
